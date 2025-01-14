@@ -1,18 +1,18 @@
-# Use an official Python runtime as the base image
+# Use the official Python runtime as the base image
 FROM python:3.9-slim
 
 # Set the working directory
 WORKDIR /app
 
-# Copy application files
+# Copy requirements file and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
+# Copy application code and tests
 COPY . .
 
-# Expose the port the app runs on
+# Expose the port for FastAPI app
 EXPOSE 8000
 
-# Start the application
+# Default command to start the app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
